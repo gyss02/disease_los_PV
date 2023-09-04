@@ -36,9 +36,12 @@ def disease():
 
 @st.cache_data
 def disease_model():
-    with gzip.open('./data/disease_model.sav.gz', 'rb') as f:
-        model = pkl.load(f)
-    return model
+    try:
+        with gzip.open('./data/disease_model.sav.gz', 'rb') as f:
+            model = pkl.load(f)
+        return model
+    except Exception as e:
+        st.error(f"An error occurred while loading the model: {str(e)}")
 
 @st.cache_data
 def los_model():
